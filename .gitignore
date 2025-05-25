@@ -1,0 +1,9 @@
+build/
+*.elf
+*.bin
+*.map
+sdkconfig.old
+sdkconfig
+.project
+.cproject
+.idea/

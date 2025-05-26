@@ -3,7 +3,7 @@
   "idf.espIdfPath": "/Users/edcooper/esp/v5.4.1/esp-idf",
   "idf.toolsPath": "/Users/edcooper/.espressif",
   "idf.pythonInstallPath": "/opt/homebrew/bin/python3",
-  "idf.port": "/dev/tty.usbserial-31231701",
+  "idf.port": "/dev/tty.usbmodem1101",
   "idf.openOcdConfigs": [
     "board/esp32c6-lpcore-builtin.cfg"
   ],
@@ -13,6 +13,8 @@
   "idf.flashType": "UART",
   "files.associations": {
     "bh1750_defs.h": "c",
-    "hdc1080.h": "c"
+    "hdc1080.h": "c",
+    "format": "cpp",
+    "cstdint": "cpp"
   }
 }

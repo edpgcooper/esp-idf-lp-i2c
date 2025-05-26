@@ -12,6 +12,9 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+extern void gfx_app_start(void);
+extern void gfx_app_update(void);
+
 extern const uint8_t lp_core_main_bin_start[] asm("_binary_lp_core_main_bin_start");
 extern const uint8_t lp_core_main_bin_end[]   asm("_binary_lp_core_main_bin_end");
 
@@ -80,10 +83,13 @@ void app_main(void)
     /* Load LP Core binary and start the coprocessor */
     lp_core_init();
 
+    gfx_app_start();
 
     while(1)
     {
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        gfx_app_update();
+        
+        vTaskDelay(pdMS_TO_TICKS(100));
 
         if (0 != ulp_readTempReady)
         {
@@ -91,36 +97,5 @@ void app_main(void)
             printf("Temp ok %lu fail %lu\n", ulp_temp_comms_ok, ulp_temp_comms_fail);
             ulp_readTempReady = 0;  // make another read.
         }
-
     }
-
-    
-
-
-
-/*
-
-    esp_sleep_wakeup_cause_t cause = esp_sleep_get_wakeup_cause();
-    if (cause != ESP_SLEEP_WAKEUP_ULP) {
-        printf("Not an LP core wakeup. Cause = %d\n", cause);
-        printf("Initializing...\n");
-
-        // Initialize LP_I2C from the main processor 
-        lp_i2c_init();
-
-        // Load LP Core binary and start the coprocessor 
-        lp_core_init();
-    } else if (cause == ESP_SLEEP_WAKEUP_ULP) {
-   //     printf("LP core woke up the main CPU\n");
-      //  printf("Lux = %ld\n", ulp_lux);
-    }
-
-    // Setup wakeup triggers 
-    ESP_ERROR_CHECK(esp_sleep_enable_ulp_wakeup());
-
-    // Enter Deep Sleep 
-    printf("Entering deep sleep...\n");
-    esp_deep_sleep_start();*/
-
-
 }

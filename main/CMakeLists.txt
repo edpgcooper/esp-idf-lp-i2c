@@ -1,7 +1,7 @@
 # Register the component
-idf_component_register(SRCS "lp_i2c_main.c"
+idf_component_register(SRCS "lp_i2c_main.c" "gfx_app.cpp" "is31fl_display.cpp"
                        INCLUDE_DIRS ""
-                       REQUIRES ulp)
+                       REQUIRES ulp adafruit_gfx)
 
 #
 # ULP support additions to component CMakeLists.txt.
